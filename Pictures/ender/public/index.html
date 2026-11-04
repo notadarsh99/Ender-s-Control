@@ -1,0 +1,463 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#07040f">
+  <title>ENDER CONTROL</title>
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="stylesheet" href="/css/theme.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/components.css">
+</head>
+<body>
+  <!-- Icon sprite -->
+  <svg class="sprite" width="0" height="0" aria-hidden="true" focusable="false">
+    <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></symbol>
+    <symbol id="i-move" viewBox="0 0 24 24"><polyline points="5 9 2 12 5 15"/><polyline points="9 5 12 2 15 5"/><polyline points="15 19 12 22 9 19"/><polyline points="19 9 22 12 19 15"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="12" y1="2" x2="12" y2="22"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></symbol>
+    <symbol id="i-pkg" viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol>
+    <symbol id="i-term" viewBox="0 0 24 24"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></symbol>
+    <symbol id="i-power" viewBox="0 0 24 24"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></symbol>
+    <symbol id="i-stop" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/></symbol>
+    <symbol id="i-send" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></symbol>
+    <symbol id="i-eye-off" viewBox="0 0 24 24"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></symbol>
+    <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="22" y1="12" x2="18" y2="12"/><line x1="6" y1="12" x2="2" y2="12"/><line x1="12" y1="6" x2="12" y2="2"/><line x1="12" y1="22" x2="12" y2="18"/></symbol>
+    <symbol id="i-up" viewBox="0 0 24 24"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></symbol>
+    <symbol id="i-down" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></symbol>
+    <symbol id="i-left" viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></symbol>
+    <symbol id="i-right" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></symbol>
+    <symbol id="i-cog" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h0a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51h0a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v0a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></symbol>
+    <symbol id="i-insta" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></symbol>
+  </svg>
+
+  <div class="app" id="app">
+    <aside class="sidebar" id="sidebar" aria-label="Main navigation">
+      <div class="brand">
+        <img class="brand-mark" src="/img/logo-mark.png" alt="" width="40" height="40" decoding="async">
+        <div class="brand-text">
+          <strong>ENDER</strong>
+          <small>CONTROL</small>
+        </div>
+      </div>
+
+      <nav class="nav" id="nav">
+        <button class="nav-item active" data-page="overview"><svg class="icon"><use href="#i-grid"/></svg><span>Overview</span></button>
+        <button class="nav-item" data-page="controls"><svg class="icon"><use href="#i-move"/></svg><span>Controls</span></button>
+        <button class="nav-item" data-page="chat"><svg class="icon"><use href="#i-chat"/></svg><span>Live Chat</span><b class="badge" id="chat-badge" hidden>0</b></button>
+        <button class="nav-item" data-page="player"><svg class="icon"><use href="#i-user"/></svg><span>Player</span></button>
+        <button class="nav-item" data-page="inventory"><svg class="icon"><use href="#i-pkg"/></svg><span>Inventory</span></button>
+        <button class="nav-item" data-page="auth"><svg class="icon"><use href="#i-lock"/></svg><span>Authentication</span></button>
+        <button class="nav-item" data-page="settings"><svg class="icon"><use href="#i-cog"/></svg><span>Settings</span></button>
+        <button class="nav-item" data-page="logs"><svg class="icon"><use href="#i-term"/></svg><span>Logs</span><b class="badge badge-bad" id="log-badge" hidden>0</b></button>
+      </nav>
+
+      <div class="sidebar-foot">
+        <div class="mini-status">
+          <span class="dot" id="side-dot" data-state="disconnected"></span>
+          <div>
+            <div class="mini-title" id="side-state">Disconnected</div>
+            <div class="mini-sub" id="side-sub">Ender &middot; 127.0.0.1 only</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+    <div class="scrim" id="scrim"></div>
+
+    <div class="main">
+      <header class="topbar">
+        <button class="icon-btn menu-btn" id="menu-btn" aria-label="Open menu"><svg class="icon"><use href="#i-menu"/></svg></button>
+        <h1 id="page-title">Overview</h1>
+        <div class="topbar-right">
+          <span class="pill" id="pill-uptime" title="Connection duration"><span class="pill-label">Uptime</span><b id="top-uptime">--:--:--</b></span>
+          <span class="pill" id="pill-afk" data-state="active" title="AFK status"><span class="dot"></span><b id="top-afk">Active</b></span>
+          <span class="pill" id="pill-conn" data-state="disconnected"><span class="dot"></span><b id="top-conn">Disconnected</b></span>
+        </div>
+      </header>
+
+      <main class="pages" id="pages">
+
+        <!-- ============================ OVERVIEW ============================ -->
+        <section class="page active" id="page-overview" data-page="overview">
+          <div class="grid grid-main">
+            <article class="card card-hero">
+              <div class="card-head">
+                <h2>Bot connection</h2>
+                <div class="head-right">
+                  <button class="link-btn" data-goto="settings">Edit server</button>
+                  <span class="tag" id="ov-state-tag" data-state="disconnected">Disconnected</span>
+                </div>
+              </div>
+              <div class="hero-actions">
+                <button class="btn btn-primary" id="btn-connect"><svg class="icon"><use href="#i-play"/></svg>Connect</button>
+                <button class="btn btn-danger" id="btn-disconnect"><svg class="icon"><use href="#i-power"/></svg>Disconnect</button>
+                <button class="btn" id="btn-reconnect"><svg class="icon"><use href="#i-refresh"/></svg>Reconnect</button>
+              </div>
+              <div class="alert" id="ov-alert" hidden></div>
+              <dl class="kv kv-2">
+                <div><dt>Status</dt><dd id="ov-state">Disconnected</dd></div>
+                <div><dt>Login status</dt><dd id="ov-auth">Unknown</dd></div>
+                <div><dt>Connected for</dt><dd id="ov-uptime">--:--:--</dd></div>
+                <div><dt>Username</dt><dd id="ov-user">Ender</dd></div>
+                <div><dt>Server</dt><dd id="ov-target">-</dd></div>
+                <div><dt>Version</dt><dd id="ov-version">-</dd></div>
+                <div><dt>Latency</dt><dd id="ov-ping">-</dd></div>
+                <div><dt>Players visible</dt><dd id="ov-players">-</dd></div>
+                <div><dt>Game mode</dt><dd id="ov-gamemode">-</dd></div>
+                <div><dt>Difficulty</dt><dd id="ov-difficulty">-</dd></div>
+              </dl>
+            </article>
+
+            <article class="card">
+              <div class="card-head"><h2>Vitals</h2></div>
+              <div class="meter">
+                <div class="meter-row"><span>Health</span><b id="ov-health-text">-</b></div>
+                <div class="bar bar-health"><div class="fill" id="ov-health-bar"></div></div>
+              </div>
+              <div class="meter">
+                <div class="meter-row"><span>Hunger</span><b id="ov-food-text">-</b></div>
+                <div class="bar bar-food"><div class="fill" id="ov-food-bar"></div></div>
+              </div>
+              <dl class="kv">
+                <div><dt>XP level</dt><dd id="ov-xp">-</dd></div>
+                <div><dt>Position</dt><dd id="ov-pos" class="mono">-</dd></div>
+                <div><dt>Dimension</dt><dd id="ov-dim">-</dd></div>
+              </dl>
+            </article>
+
+            <article class="card">
+              <div class="card-head"><h2>AFK &amp; idle</h2><span class="tag" id="afk-tag" data-state="active">Active</span></div>
+              <p class="muted small" id="afk-hint">Shows whether you have interacted with the bot recently. Idle mode holds Ender still and blocks movement until you turn it off.</p>
+              <label class="switch">
+                <input type="checkbox" id="idle-toggle">
+                <span class="switch-track"><span class="switch-thumb"></span></span>
+                <span class="switch-label"><svg class="icon"><use href="#i-moon"/></svg>Manual idle mode</span>
+              </label>
+              <p class="muted small" id="afk-idle-for">Last input: just now</p>
+            </article>
+
+            <article class="card card-wide">
+              <div class="card-head"><h2>Recent chat</h2><button class="link-btn" data-goto="chat">Open chat</button></div>
+              <div class="mini-list" id="ov-chat"><p class="empty">No messages yet.</p></div>
+            </article>
+
+            <article class="card card-wide">
+              <div class="card-head"><h2>Recent activity</h2><button class="link-btn" data-goto="logs">Open logs</button></div>
+              <div class="mini-list mono" id="ov-logs"><p class="empty">No activity yet.</p></div>
+            </article>
+          </div>
+        </section>
+
+        <!-- ============================ CONTROLS ============================ -->
+        <section class="page" id="page-controls" data-page="controls">
+          <div class="notice" id="controls-notice">Connect Ender to enable controls.</div>
+          <div class="grid grid-2">
+            <article class="card">
+              <div class="card-head"><h2>Movement</h2><button class="btn btn-danger btn-sm" id="btn-stop-move"><svg class="icon"><use href="#i-stop"/></svg>Stop</button></div>
+              <div class="dpad">
+                <span></span>
+                <button class="pad-btn" data-control="forward" data-key="W">W<small>Forward</small></button>
+                <span></span>
+                <button class="pad-btn" data-control="left" data-key="A">A<small>Left</small></button>
+                <button class="pad-btn" data-control="back" data-key="S">S<small>Back</small></button>
+                <button class="pad-btn" data-control="right" data-key="D">D<small>Right</small></button>
+              </div>
+              <div class="action-row">
+                <button class="pad-btn pad-wide" data-control="jump" data-key="Space"><svg class="icon"><use href="#i-up"/></svg>Jump<small>Space</small></button>
+                <button class="pad-btn pad-wide pad-toggle" data-control="sprint" data-toggle="true" data-key="R">Sprint<small>R / toggle</small></button>
+                <button class="pad-btn pad-wide pad-toggle" data-control="sneak" data-toggle="true" data-key="Shift">Sneak<small>Shift / toggle</small></button>
+              </div>
+              <p class="muted small">Keyboard: <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> move, <kbd>Space</kbd> jump, <kbd>Shift</kbd> sneak (hold), <kbd>R</kbd> sprint. Everything stops if this tab loses focus.</p>
+            </article>
+
+            <article class="card card-wide">
+              <div class="card-head"><h2>Clicks</h2><span class="tag" id="click-result">Ready</span></div>
+              <div class="click-row">
+                <button class="click-btn" id="btn-click-left"><svg class="icon"><use href="#i-target"/></svg>Left click<small>Attack / swing (tap)</small></button>
+                <button class="click-btn" id="btn-click-dig"><svg class="icon"><use href="#i-down"/></svg>Break block<small>Hold to dig</small></button>
+                <button class="click-btn" id="btn-click-right"><svg class="icon"><use href="#i-play"/></svg>Right click<small>Place / interact / use item</small></button>
+              </div>
+              <div class="card-head sub"><h3>Hotbar</h3></div>
+              <div class="hotbar-quick" id="hotbar-quick" role="group" aria-label="Hotbar quick select"></div>
+              <p class="muted small">Press <kbd>1</kbd>&ndash;<kbd>9</kbd> or tap a slot to hold that item. Manage the full inventory on the Inventory page.</p>
+              <p class="muted small">Clicks act on whatever is under Ender&rsquo;s crosshair, so aim with the camera first. You can also click the camera pad: a quick tap is a left click, a right-click is a right click. Each click is one action, nothing repeats on its own.</p>
+            </article>
+
+            <article class="card">
+              <div class="card-head"><h2>Camera</h2><button class="btn btn-sm" id="btn-cam-reset"><svg class="icon"><use href="#i-target"/></svg>Reset</button></div>
+              <div class="cam-pad" id="cam-pad" tabindex="0" aria-label="Drag to rotate the camera">
+                <div class="cam-grid"></div>
+                <div class="cam-dot" id="cam-dot"></div>
+                <span class="cam-hint">Drag to look &middot; tap = left click &middot; right-click = use</span>
+              </div>
+              <div class="look-row">
+                <button class="icon-btn" data-look="left" aria-label="Look left"><svg class="icon"><use href="#i-left"/></svg></button>
+                <button class="icon-btn" data-look="up" aria-label="Look up"><svg class="icon"><use href="#i-up"/></svg></button>
+                <button class="icon-btn" data-look="down" aria-label="Look down"><svg class="icon"><use href="#i-down"/></svg></button>
+                <button class="icon-btn" data-look="right" aria-label="Look right"><svg class="icon"><use href="#i-right"/></svg></button>
+              </div>
+              <div class="slider">
+                <label for="yaw-slider">Yaw <b id="yaw-val">0&deg;</b></label>
+                <input type="range" id="yaw-slider" min="-180" max="180" step="1" value="0">
+              </div>
+              <div class="slider">
+                <label for="pitch-slider">Pitch <b id="pitch-val">0&deg;</b></label>
+                <input type="range" id="pitch-slider" min="-90" max="90" step="1" value="0">
+              </div>
+              <div class="slider">
+                <label for="sens-slider">Sensitivity <b id="sens-val">1.0&times;</b></label>
+                <input type="range" id="sens-slider" min="0.2" max="3" step="0.1" value="1">
+              </div>
+              <p class="muted small">Facing <b id="cam-facing">-</b>. Arrow keys also nudge the camera.</p>
+            </article>
+          </div>
+        </section>
+
+        <!-- ============================== CHAT ============================== -->
+        <section class="page" id="page-chat" data-page="chat">
+          <article class="card chat-card">
+            <div class="toolbar">
+              <select id="chat-filter" aria-label="Filter messages">
+                <option value="all">All messages</option>
+                <option value="chat">Player chat</option>
+                <option value="system">System</option>
+                <option value="outgoing">Sent commands</option>
+              </select>
+              <input type="search" id="chat-search" placeholder="Search messages..." autocomplete="off" maxlength="60">
+              <label class="check"><input type="checkbox" id="chat-autoscroll" checked><span>Auto-scroll</span></label>
+              <button class="btn btn-sm" id="btn-chat-clear"><svg class="icon"><use href="#i-trash"/></svg>Clear</button>
+            </div>
+            <div class="chat-list" id="chat-list" role="log" aria-live="polite"></div>
+            <form class="chat-form" id="chat-form" autocomplete="off">
+              <input type="text" id="chat-input" placeholder="Send a message or /command..." maxlength="256" autocomplete="off" spellcheck="false">
+              <span class="counter" id="chat-counter">0/256</span>
+              <button class="btn btn-primary" type="submit" id="chat-send"><svg class="icon"><use href="#i-send"/></svg>Send</button>
+            </form>
+            <p class="muted small">Login commands are blocked here &mdash; use the Authentication page so your password never appears in chat history.</p>
+          </article>
+        </section>
+
+        <!-- ============================= PLAYER ============================= -->
+        <section class="page" id="page-player" data-page="player">
+          <div class="grid grid-2">
+            <article class="card">
+              <div class="card-head"><h2>Vitals</h2><span class="tag" id="pl-status">Offline</span></div>
+              <div class="meter">
+                <div class="meter-row"><span>Health</span><b id="pl-health-text">-</b></div>
+                <div class="bar bar-health"><div class="fill" id="pl-health-bar"></div></div>
+              </div>
+              <div class="meter">
+                <div class="meter-row"><span>Hunger</span><b id="pl-food-text">-</b></div>
+                <div class="bar bar-food"><div class="fill" id="pl-food-bar"></div></div>
+              </div>
+              <div class="meter">
+                <div class="meter-row"><span>Experience</span><b id="pl-xp-text">-</b></div>
+                <div class="bar bar-xp"><div class="fill" id="pl-xp-bar"></div></div>
+              </div>
+              <dl class="kv kv-2">
+                <div><dt>Saturation</dt><dd id="pl-sat">-</dd></div>
+                <div><dt>Game mode</dt><dd id="pl-gm">-</dd></div>
+                <div><dt>Dimension</dt><dd id="pl-dim">-</dd></div>
+                <div><dt>On ground</dt><dd id="pl-ground">-</dd></div>
+                <div><dt>World time</dt><dd id="pl-time">-</dd></div>
+                <div><dt>Weather</dt><dd id="pl-weather">-</dd></div>
+              </dl>
+            </article>
+
+            <article class="card">
+              <div class="card-head"><h2>Position</h2></div>
+              <div class="coords">
+                <div><span>X</span><b id="pl-x" class="mono">-</b></div>
+                <div><span>Y</span><b id="pl-y" class="mono">-</b></div>
+                <div><span>Z</span><b id="pl-z" class="mono">-</b></div>
+              </div>
+              <div class="compass-wrap">
+                <div class="compass" aria-hidden="true">
+                  <span class="c-n">N</span><span class="c-e">E</span><span class="c-s">S</span><span class="c-w">W</span>
+                  <div class="needle" id="pl-needle"></div>
+                </div>
+                <dl class="kv">
+                  <div><dt>Facing</dt><dd id="pl-facing">-</dd></div>
+                  <div><dt>Yaw</dt><dd id="pl-yaw" class="mono">-</dd></div>
+                  <div><dt>Pitch</dt><dd id="pl-pitch" class="mono">-</dd></div>
+                </dl>
+              </div>
+              <div class="card-head sub"><h3>Active controls</h3></div>
+              <div class="chips" id="pl-controls"><span class="chip chip-off">none</span></div>
+            </article>
+          </div>
+        </section>
+
+        <!-- ============================ INVENTORY =========================== -->
+        <section class="page" id="page-inventory" data-page="inventory">
+          <div class="notice" id="inv-notice">Connect Ender to view and manage the inventory.</div>
+          <article class="card inv-actions" id="inv-actions" hidden>
+            <div class="inv-actions-head">
+              <div>
+                <div class="slot-label">Selected</div>
+                <div class="inv-sel-name" id="inv-sel-name">-</div>
+              </div>
+              <button class="btn btn-sm" id="btn-inv-cancel"><svg class="icon"><use href="#i-x"/></svg>Cancel</button>
+            </div>
+            <div class="inv-actions-row">
+              <button class="btn btn-sm btn-primary" id="btn-inv-select"><svg class="icon"><use href="#i-target"/></svg>Hold</button>
+              <button class="btn btn-sm" id="btn-inv-equip">Equip</button>
+              <button class="btn btn-sm" id="btn-inv-offhand">Off-hand</button>
+              <button class="btn btn-sm" id="btn-inv-unequip">Unequip</button>
+              <button class="btn btn-sm btn-danger" id="btn-inv-drop1"><svg class="icon"><use href="#i-trash"/></svg>Drop 1</button>
+              <button class="btn btn-sm btn-danger" id="btn-inv-dropall"><svg class="icon"><use href="#i-trash"/></svg>Drop stack</button>
+            </div>
+            <p class="muted small">Now click any other slot to move or swap this item there.</p>
+          </article>
+          <div class="grid grid-2">
+            <article class="card">
+              <div class="card-head"><h2>Equipment</h2></div>
+              <div class="equip">
+                <div class="armor-col" id="inv-armor"></div>
+                <div class="equip-side">
+                  <div class="slot-label">Held item</div>
+                  <div id="inv-held"></div>
+                  <div class="slot-label">Off-hand</div>
+                  <div id="inv-offhand"></div>
+                </div>
+              </div>
+            </article>
+            <article class="card">
+              <div class="card-head"><h2>Hotbar</h2></div>
+              <div class="slot-grid slot-grid-9" id="inv-hotbar"></div>
+              <div class="card-head sub"><h3>Summary</h3></div>
+              <dl class="kv kv-2">
+                <div><dt>Occupied slots</dt><dd id="inv-count">-</dd></div>
+                <div><dt>Total items</dt><dd id="inv-total">-</dd></div>
+              </dl>
+            </article>
+            <article class="card card-wide">
+              <div class="card-head"><h2>Backpack</h2></div>
+              <div class="slot-grid slot-grid-9" id="inv-main"></div>
+            </article>
+          </div>
+        </section>
+
+        <!-- ============================== AUTH ============================== -->
+        <section class="page" id="page-auth" data-page="auth">
+          <div class="grid grid-2">
+            <article class="card">
+              <div class="card-head"><h2>Server login</h2><span class="tag" id="auth-tag" data-state="unknown">Unknown</span></div>
+              <p class="muted small">Sends <code>/login</code> or <code>/register</code> to the server as Ender. Your password goes straight to the server &mdash; it is never stored, logged or written to disk, and the field is cleared immediately after sending.</p>
+              <div class="segmented" id="auth-mode" role="tablist">
+                <button type="button" class="seg active" data-auth-mode="login">Login</button>
+                <button type="button" class="seg" data-auth-mode="register">Register</button>
+              </div>
+              <form id="auth-form" autocomplete="off">
+                <label class="field">
+                  <span>Password</span>
+                  <div class="input-wrap">
+                    <input type="password" id="auth-password" name="ender-pass" autocomplete="new-password" maxlength="128" spellcheck="false" autocapitalize="off" placeholder="Server password">
+                    <button type="button" class="icon-btn" id="auth-toggle" aria-label="Show password"><svg class="icon"><use href="#i-eye"/></svg></button>
+                  </div>
+                </label>
+                <button class="btn btn-primary btn-block" type="submit" id="auth-submit"><svg class="icon"><use href="#i-lock"/></svg><span id="auth-submit-text">Send /login</span></button>
+                <p class="form-msg" id="auth-msg" role="status"></p>
+              </form>
+            </article>
+            <article class="card">
+              <div class="card-head"><h2>Good to know</h2></div>
+              <ul class="plain-list">
+                <li>Connect Ender first &mdash; authentication is only possible once the bot has joined the world.</li>
+                <li>The login status is detected from the server&rsquo;s own messages, so it may read &ldquo;Unknown&rdquo; on servers that word things differently.</li>
+                <li>Passwords cannot contain spaces. Registration repeats the password once, the way most servers expect.</li>
+                <li>Attempts are rate limited to respect server authentication limits. Too many wrong tries can get an account kicked or banned.</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        <!-- ============================ SETTINGS ============================ -->
+        <section class="page" id="page-settings" data-page="settings">
+          <div class="notice" id="set-notice" hidden>Disconnect Ender to change these settings.</div>
+          <div class="grid grid-2">
+            <article class="card">
+              <div class="card-head"><h2>Connection target</h2><span class="tag" id="set-tag" data-state="active">Editable</span></div>
+              <form id="set-form" autocomplete="off" novalidate>
+                <label class="field">
+                  <span>Server address (IP or hostname)</span>
+                  <input type="text" id="set-host" maxlength="253" spellcheck="false" autocapitalize="off" autocomplete="off" placeholder="play.example.com">
+                </label>
+                <div class="field-row">
+                  <label class="field">
+                    <span>Port</span>
+                    <input type="text" id="set-port" inputmode="numeric" maxlength="5" spellcheck="false" autocomplete="off" placeholder="25565">
+                  </label>
+                  <label class="field">
+                    <span>Bot username</span>
+                    <input type="text" id="set-username" maxlength="16" spellcheck="false" autocapitalize="off" autocomplete="off" placeholder="Ender">
+                  </label>
+                </div>
+                <div class="form-actions">
+                  <button class="btn btn-primary" type="submit" id="set-save"><svg class="icon"><use href="#i-cog"/></svg>Save</button>
+                  <button class="btn" type="button" id="set-save-connect"><svg class="icon"><use href="#i-play"/></svg>Save &amp; connect</button>
+                  <button class="btn" type="button" id="set-reset"><svg class="icon"><use href="#i-refresh"/></svg>Defaults</button>
+                </div>
+                <p class="form-msg" id="set-msg" role="status"></p>
+              </form>
+            </article>
+            <article class="card">
+              <div class="card-head"><h2>Details</h2></div>
+              <dl class="kv kv-2">
+                <div><dt>Minecraft version</dt><dd id="set-version">-</dd></div>
+                <div><dt>Authentication</dt><dd>Offline mode</dd></div>
+              </dl>
+              <ul class="plain-list">
+                <li>Usernames are 3&ndash;16 characters: letters, numbers or underscore.</li>
+                <li>Enter the address without <code>http://</code> and without the port &mdash; the port has its own field.</li>
+                <li>Changes can only be saved while Ender is disconnected.</li>
+                <li>Only the address, port and username are saved (to <code>data/settings.json</code>). Passwords are never stored.</li>
+                <li>Offline mode only works on servers that allow it. Premium (online-mode) servers will refuse the bot.</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        <!-- ============================== LOGS ============================== -->
+        <section class="page" id="page-logs" data-page="logs">
+          <article class="card log-card">
+            <div class="toolbar">
+              <div class="segmented" id="log-tabs">
+                <button class="seg active" data-log-tab="all">All</button>
+                <button class="seg" data-log-tab="connection">Connection</button>
+                <button class="seg" data-log-tab="chat">Chat</button>
+                <button class="seg" data-log-tab="error">Errors</button>
+              </div>
+              <label class="check"><input type="checkbox" id="log-autoscroll" checked><span>Auto-scroll</span></label>
+              <button class="btn btn-sm" id="btn-log-clear"><svg class="icon"><use href="#i-trash"/></svg>Clear</button>
+            </div>
+            <div class="log-list mono" id="log-list" role="log"></div>
+            <p class="muted small" id="log-count">0 entries &middot; logs are kept in memory only and vanish when the dashboard stops.</p>
+          </article>
+        </section>
+
+      </main>
+      <footer class="footer">
+        <span class="footer-brand">ENDER CONTROL</span>
+        <span class="footer-sep" aria-hidden="true">&middot;</span>
+        <span class="footer-credit"><img class="footer-avatar" src="/img/dev-avatar.png" alt="" width="22" height="22" decoding="async">Built by <a class="footer-link" href="https://www.instagram.com/dev_enderhere/" target="_blank" rel="noopener noreferrer"><svg class="icon"><use href="#i-insta"/></svg>dev_enderhere</a></span>
+      </footer>
+    </div>
+  </div>
+
+  <div class="toasts" id="toasts" aria-live="polite"></div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script type="module" src="/js/main.js"></script>
+</body>
+</html>
